@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 // react의 app 컴포넌트 역할 - root 의 역할
 export default function App({ Component, pageProps }: AppProps) {
@@ -11,8 +12,13 @@ export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
   const onClickButton = () => {
-    router.push("/search");
+    router.push("/test");
   }
+
+  // mount 될 때 한번만 실행해서 어떤 페이지를 prefetch 할지 결정
+  useEffect(() => {
+    router.prefetch("/test");
+  }, []);
 
   return (
     <>
@@ -21,9 +27,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <br></br>
         <Link href="/search">Search</Link>
         <br></br>
-        <Link href="/book/1">book/1</Link>
+        <Link href="/book/1" prefetch={false}>book/1</Link>
         <div>
-          <button onClick={onClickButton}>search 페이지로 이동</button>
+          <button onClick={onClickButton}>test페이지로 이동</button>
         </div>
       </header>
         <Component {...pageProps} />

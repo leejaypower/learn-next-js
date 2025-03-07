@@ -1,7 +1,9 @@
+import styles from './index.module.css'
+
 export default function Home() {
   return (
     <>
-      <header>Hello World</header>
+      <header className={styles.header}>Hello World</header>
     </>
   );
 }
