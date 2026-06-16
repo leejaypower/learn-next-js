@@ -1,0 +1,20 @@
+{
+  "name": "learn-next-js",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Next.js 학습 프론트엔드 + NestJS 서버 모노레포",
+  "engines": {
+    "node": ">=20"
+  },
+  "workspaces": [
+    "book-page-router",
+    "onebite-books-server"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev --workspace book-page-router",
+    "dev:server": "npm run start:dev --workspace onebite-books-server",
+    "build:web": "npm run build --workspace book-page-router",
+    "build:server": "npm run build --workspace onebite-books-server",
+    "lint:web": "npm run lint --workspace book-page-router"
+  }
+}
