@@ -2,14 +2,13 @@
 // id가 없어도(index.tsx 만들기 싫을때), id가 몇개가 있어도 모두 캐치
 // 주의: catch all segment와 같은 레벨에 둘 수 없음!
 
-import { useRouter } from "next/router"; // 페이지 라우터에서는 next/router 사용
+import { useRouter } from 'next/router'; // 페이지 라우터에서는 next/router 사용
 
 export default function Book() {
   const router = useRouter();
   console.log(router.query);
   return <div>Book {router.query.id}</div>;
 }
-
 
 // [...id].tsx
 // catch all segment: 모든 경로를 캐치하는 세그먼트

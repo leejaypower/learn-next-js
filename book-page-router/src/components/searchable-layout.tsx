@@ -1,9 +1,12 @@
-import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import styles from "./searchable-layout.module.css";
 
 export default function SearchableLayout({
   children,
-}: { children: React.ReactNode }) {
+}: {
+  children: React.ReactNode;
+}) {
   const router = useRouter();
   const q = router.query.q as string | undefined;
   const [search, setSearch] = useState(q || "");
@@ -23,7 +26,7 @@ export default function SearchableLayout({
 
   return (
     <div>
-      <div>
+      <div className={styles["search-container"]}>
         <input
           placeholder="검색어를 입력하세요"
           value={search}
