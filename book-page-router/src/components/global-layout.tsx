@@ -10,7 +10,7 @@ export default function GlobalLayout({ children }: { children: React.ReactNode }
       <main>
         {children}
       </main>
-      <footer className={styles.footer}>제작: leejaypower</footer>
+      <footer className={styles.footer}>제작 @leejaypower</footer>
     </div>
   );
 }

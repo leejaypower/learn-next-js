@@ -1,3 +1,4 @@
+/* 페이지에서 불러올 모듈 css - 전역 css는 app 컴포넌트를 제외한 컴포넌트에서 import가 제한되어있음 */
 .header {
   color: red;
 }
