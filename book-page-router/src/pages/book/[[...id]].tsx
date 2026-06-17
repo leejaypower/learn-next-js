@@ -1,5 +1,5 @@
 // optional catch all segment
-// id가 없어도, id가 몇개가 있어도 모두 캐치
+// id가 없어도(index.tsx 만들기 싫을때), id가 몇개가 있어도 모두 캐치
 // 주의: catch all segment와 같은 레벨에 둘 수 없음!
 
 import { useRouter } from "next/router"; // 페이지 라우터에서는 next/router 사용

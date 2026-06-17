@@ -3,6 +3,7 @@ import SearchableLayout from "@/components/searchable-layout";
 export default function Search() {
   const router = useRouter();
   
+  console.log('1', router)
   console.log(router.query);
 
   return <div>Search {router.query.q}</div>;
