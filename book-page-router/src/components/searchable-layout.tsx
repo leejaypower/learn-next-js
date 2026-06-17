@@ -1,9 +1,40 @@
-import styles from "@/components/searchable-layout.module.css"
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
-export default function SearchableLayout({ children }: { children: React.ReactNode }) {
+export default function SearchableLayout({
+  children,
+}: { children: React.ReactNode }) {
+  const router = useRouter();
+  const q = router.query.q as string | undefined;
+  const [search, setSearch] = useState(q || "");
+
+  const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
+
+  const onSubmit = () => {
+    if (!search || q === search) return;
+    router.push(`/search?q=${search}`);
+  };
+
+  useEffect(() => {
+    setSearch(q || "");
+  }, [q]);
+
   return (
-    <div className={styles.container}>
-      나는야 검색바{children}
+    <div>
+      <div>
+        <input
+          placeholder="검색어를 입력하세요"
+          value={search}
+          onChange={onChangeSearch}
+          onKeyDown={(e) => e.key === "Enter" && onSubmit()}
+        />
+        <button type="button" onClick={onSubmit}>
+          검색
+        </button>
+      </div>
+      {children}
     </div>
   );
 }

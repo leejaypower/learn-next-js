@@ -1,12 +1,11 @@
 import "@/styles/globals.css";
 import type { NextPage } from "next";
+import GlobalLayout from "@/components/global-layout";
+import type { AppProps } from "next/app";
 
 type NextPageWithLayout = NextPage & {
-  getLayout?: (page: React.ReactNode) => React.ReactNode;
-}
-
-import GlobalLayout from "@/components/global-layout";
-import { AppProps } from "next/app";
+	getLayout?: (page: React.ReactNode) => React.ReactNode;
+};
 
 // react의 app 컴포넌트 역할 - root 의 역할
 export default function App({ Component, pageProps }: AppProps & {
@@ -25,6 +24,7 @@ export default function App({ Component, pageProps }: AppProps & {
   return (
     <GlobalLayout>
       {getLayout(<Component {...pageProps} />)} 
+      {/* jsx 표현식은 컴파일 되면 그냥 객체 값이다. 그래서 함수 인수로 넣을수 있음 */}
     </GlobalLayout>
   ); 
 }

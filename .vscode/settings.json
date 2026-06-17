@@ -1,0 +1,22 @@
+{
+  // 저장(Cmd+S) 시 ESLint가 자동으로 고칠 수 있는 규칙을 수정
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+
+  // 모노레포: 파일마다 가장 가까운 .eslintrc를 자동으로 찾아 적용
+  // (book-page-router / onebite-books-server 각자의 설정을 따로 인식)
+  "eslint.workingDirectories": [{ "mode": "auto" }],
+
+  // ESLint로 검사할 언어
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+
+  // 에디터가 워크스페이스 TS(5.8.2)를 사용하도록 고정.
+  // 내장 TS와 버전이 달라 생기던 검사 불일치(globals.css 부수효과 import 에러 등)를 해결.
+  "typescript.tsdk": "book-page-router/node_modules/typescript/lib"
+}
