@@ -1,11 +1,19 @@
-import { useRouter } from 'next/router'; // 페이지 라우터에서는 next/router 사용
-import SearchableLayout from '@/components/searchable-layout';
-export default function Search() {
-  const router = useRouter();
+import SearchableLayout from "@/components/searchable-layout";
+import { useRouter } from "next/router";
+import { ReactNode } from "react";
+import books from "@/mock/books.json";
+import BookItem from "@/components/book-item";
 
-  return <div>Search {router.query.q}</div>;
+export default function Page() {
+  return (
+    <div>
+      {books.map((book) => (
+        <BookItem key={book.id} {...book} />
+      ))}
+    </div>
+  );
 }
 
-Search.getLayout = (page: React.ReactNode) => {
+Page.getLayout = (page: ReactNode) => {
   return <SearchableLayout>{page}</SearchableLayout>;
 };
