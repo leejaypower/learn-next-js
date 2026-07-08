@@ -27,15 +27,40 @@
 import {
   GetServerSideProps,
   GetServerSidePropsContext,
+  GetStaticProps,
+  GetStaticPropsContext,
   InferGetServerSidePropsType,
+  InferGetStaticPropsType,
 } from "next";
 import style from "./[id].module.css";
 import fetchOneBook from "@/lib/fetch-one-book";
 
-export const getServerSideProps = async (
-  context: GetServerSidePropsContext,
-) => {
-  const id = context.params!.id; // 무조건 params가 있어야 접근할 수 있는 사이트이기 때문에 단언해도 괜찮다.
+// export const getServerSideProps = async (
+//   context: GetServerSidePropsContext,
+// ) => {
+//   const id = context.params!.id; // 무조건 params가 있어야 접근할 수 있는 사이트이기 때문에 단언해도 괜찮다.
+//   const book = await fetchOneBook(Number(id));
+//   return {
+//     props: { book },
+//   };
+// };
+
+// 어떤 경로(id)들을 미리 정적 생성할지 알려주는 함수
+export const getStaticPaths = async () => {
+  return {
+    paths: [
+      { params: { id: "1" } },
+      { params: { id: "2" } },
+      { params: { id: "3" } },
+    ],
+    // paths에 없는 경로로 접근하면 404를 반환 (true로 하면 대체 페이지 처리)
+    fallback: false,
+  };
+};
+
+// 각 경로마다 실제로 넣을 데이터(props)를 가져오는 함수
+export const getStaticProps = async (context: GetStaticPropsContext) => {
+  const id = context.params!.id;
   const book = await fetchOneBook(Number(id));
   return {
     props: { book },
@@ -44,7 +69,7 @@ export const getServerSideProps = async (
 
 export default function Page({
   book,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   if (!book) {
     return "문제가 발생했습니다. 다시 시도해주세요.";
   }
