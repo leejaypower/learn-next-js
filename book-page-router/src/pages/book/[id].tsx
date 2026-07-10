@@ -34,6 +34,8 @@ import {
 } from "next";
 import style from "./[id].module.css";
 import fetchOneBook from "@/lib/fetch-one-book";
+import { useRouter } from "next/router";
+import { notFound } from "next/navigation";
 
 // export const getServerSideProps = async (
 //   context: GetServerSidePropsContext,
@@ -53,8 +55,10 @@ export const getStaticPaths = async () => {
       { params: { id: "2" } },
       { params: { id: "3" } },
     ],
-    // paths에 없는 경로로 접근하면 404를 반환 (true로 하면 대체 페이지 처리)
-    fallback: false,
+    // false: paths에 없는 경로로 접근하면 404를 반환 = {notFound: true}
+    // true: 일단 props가 없는 페이지를 빠르게 생성해서 반환 (레이아웃만) -> 그 이후 props를 따로 반환
+    // 'blocking' : paths에 없는 경로로 접근하면 즉각적으로 페이지를 생성(사전렌더링)해서 리턴 - 페이지의 크기에 따라 대기시간이 오래걸릴 수 있다.
+    fallback: true,
   };
 };
 
@@ -62,6 +66,14 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const id = context.params!.id;
   const book = await fetchOneBook(Number(id));
+
+  if (!book) {
+    return {
+      // next서버가 notFound로 리다이렉팅하도록 하기
+      notFound: true,
+    };
+  }
+
   return {
     props: { book },
   };
@@ -70,6 +82,12 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
 export default function Page({
   book,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return "로딩중입니다";
+  }
+
   if (!book) {
     return "문제가 발생했습니다. 다시 시도해주세요.";
   }
