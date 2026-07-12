@@ -15,12 +15,12 @@ import Head from "next/head";
 //   // console.log("서버사이드"); // 터미널에서만 찍힌다.
 
 //   const [allBooks, recoBooks] = await Promise.all([
-//     fetchBooks(),
+//     fetchBooks(),e
 //     fetchRandomBooks(),
 //   ]);
 
 //   return {
-//     // 무조건 props property가 있는 객체여야한다.
+//     // 무조건 props property가 있는 객체여야한다./Users/jaylee/Documents/learn-next-js/book-page-router
 //     props: {
 //       allBooks,
 //       recoBooks,
