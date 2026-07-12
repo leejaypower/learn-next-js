@@ -1,5 +1,5 @@
-import BookItem from "@/components/book-item";
-import style from "./page.module.css";
+import BookItem from "@/app/components/book-item";
+import style from "../page.module.css";
 import books from "@/mock/books.json";
 
 export default function Home() {

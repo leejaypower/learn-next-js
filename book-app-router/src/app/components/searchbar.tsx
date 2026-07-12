@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation"; // next/router는 page router꺼니까 주의
-import style from "./serachbar.module.css";
+import style from "./searchbar.module.css";
 
 export default function Searchbar() {
   const router = useRouter();
