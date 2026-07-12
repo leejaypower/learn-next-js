@@ -1,4 +1,4 @@
-import { IsCustomUrl, IsNonEmptyString } from 'src/validate-decorators';
+import { IsCustomUrl, IsNonEmptyString } from '../../validate-decorators';
 
 export class CreateBookDto {
   @IsNonEmptyString()

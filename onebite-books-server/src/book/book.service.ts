@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { PrismaService } from 'src/prisma/prisma.service';
-import { prismaExclude } from 'src/util/prisma-exclude';
-import { removeWhitespace } from 'src/util/remove-whitepsace';
+import { PrismaService } from '../prisma/prisma.service';
+import { prismaExclude } from '../util/prisma-exclude';
+import { removeWhitespace } from '../util/remove-whitepsace';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 
