@@ -8,13 +8,14 @@
   },
   "workspaces": [
     "book-page-router",
+    "book-app-router",
     "onebite-books-server"
   ],
   "scripts": {
-    "dev:web": "npm run dev --workspace book-page-router",
+    "dev:web": "npm run dev --workspace book-app-router",
     "dev:server": "npm run start:dev --workspace onebite-books-server",
-    "build:web": "npm run build --workspace book-page-router",
+    "build:web": "npm run build --workspace book-app-router",
     "build:server": "npm run build --workspace onebite-books-server",
-    "lint:web": "npm run lint --workspace book-page-router"
+    "lint:web": "npm run lint --workspace book-app-router"
   }
 }
