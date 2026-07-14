@@ -23,7 +23,9 @@ async function AllBooks() {
 
 async function RecoBooks() {
   const url = `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/random`;
-  const response = await fetch(url);
+  // const response = await fetch(url, { cache: "force-cache" }); // 캐시 강제 - 한번 응답한 이후로 계속 캐싱된 값
+  // const response = await fetch(url, { next: { tags: ['a'] } });
+  const response = await fetch(url, { next: { revalidate: 3 } }); // 특정 시간을 주기로 캐시 업데이트 (stale 상태)
 
   if (!response.ok) {
     return <div>오류가 발생했습니다.</div>;
