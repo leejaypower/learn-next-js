@@ -6,6 +6,9 @@ import { BookData } from "@/types";
 async function Footer() {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`,
+    {
+      cache: "force-cache", // 캐시 강제 - 북을 등록하는 기능이 없기 때문에
+    },
     // request memoization: next가 한 페이지를 렌더링할때 중복 호출되는 api를 자동으로 캐싱한다.
     // 렌더링이 종료되면 캐싱이 소멸된다.
   );

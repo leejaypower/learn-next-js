@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import Searchbar from "../../components/searchbar";
 
 // 해당하는 경로의 레이아웃으로 자동 설정이 된다. (이 경로 아래 중첩 경로 - search/setting가 있다고 해도)
@@ -6,7 +6,13 @@ import Searchbar from "../../components/searchbar";
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <div>
-      <Searchbar />
+      {/* 클라이언트 라우터 캐시: 레이아웃은 한번 만들어지면 next가 클라이언트 js메모리(페이지의 js)에 캐시로 들고 재사용된다. */}
+      <div>{new Date().toLocaleString()}</div>
+      {/* next 에서 suspense 로 묶여있는 애들은 곧바로 렌더링하지 않는다.
+       suspense 내의 비동기 작업이 끝날때까지 미결의 상태 */}
+      <Suspense fallback={<div>Loading ... </div>}>
+        <Searchbar />
+      </Suspense>
       {children}
     </div>
   );
