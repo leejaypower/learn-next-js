@@ -3,6 +3,7 @@ import style from "./page.module.css";
 import { BookData } from "@/types";
 import { delay } from "@/util/delay";
 import { Suspense } from "react";
+import BookListSkeleton from "@/components/skeleton/book-list-skeleton";
 
 // 특정 페이지의 유형을 강제로 static, dynamic 페이지로 설정하는 옵션
 // 1. auto : 기본값, 아무것도 강제하지 않음
@@ -61,11 +62,23 @@ export const dynamic = "force-dynamic"; // suspense test를 위해 강제로 dyn
 export default async function Home() {
   return (
     <div className={style.container}>
-      <Suspense fallback={<div>추천중...</div>}>
+      <Suspense
+        fallback={
+          <>
+            <BookListSkeleton count={3} />
+          </>
+        }
+      >
         <RecoBooks />
       </Suspense>
 
-      <Suspense fallback={<div>책 가져오는중...</div>}>
+      <Suspense
+        fallback={
+          <>
+            <BookListSkeleton count={10} />
+          </>
+        }
+      >
         <AllBooks />
       </Suspense>
     </div>

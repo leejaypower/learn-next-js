@@ -1,8 +1,8 @@
 import BookItem from "@/components/book-item";
+import BookListSkeleton from "@/components/skeleton/book-list-skeleton";
 import { BookData } from "@/types";
 import { delay } from "@/util/delay";
 import { Suspense } from "react";
-
 // export const dynamic = "error";
 
 async function SearchResult({ q }: { q: string }) {
@@ -28,7 +28,7 @@ export default async function Page({
 }) {
   const { q } = await searchParams;
   return (
-    <Suspense key={q} fallback={<div>검색 중...</div>}>
+    <Suspense key={q} fallback={<BookListSkeleton count={1} />}>
       {/* SearchResult를 스트리밍으로 전환 -> 느린 fetch 를 안기다리고 먼저 응답 */}
       <SearchResult q={q || ""}></SearchResult>
     </Suspense>
