@@ -1,6 +1,8 @@
 import BookItem from "@/components/book-item";
 import style from "./page.module.css";
 import { BookData } from "@/types";
+import { delay } from "@/util/delay";
+import { Suspense } from "react";
 
 // 특정 페이지의 유형을 강제로 static, dynamic 페이지로 설정하는 옵션
 // 1. auto : 기본값, 아무것도 강제하지 않음
@@ -10,6 +12,8 @@ import { BookData } from "@/types";
 // export const dynamic = "";
 
 async function AllBooks() {
+  await delay(1500);
+
   const url = `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`;
   const response = await fetch(url, { cache: "force-cache" }); // 캐시 강제 - 북은 고정된 데이터이기 때문
 
@@ -29,6 +33,8 @@ async function AllBooks() {
 }
 
 async function RecoBooks() {
+  await delay(3000);
+
   const url = `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/random`;
   // const response = await fetch(url, { cache: "force-cache" }); // 캐시 강제 - 한번 응답한 이후로 계속 캐싱된 값
   // const response = await fetch(url, { next: { tags: ['a'] } });
@@ -50,11 +56,18 @@ async function RecoBooks() {
   );
 }
 
-export default function Home() {
+export const dynamic = "force-dynamic"; // suspense test를 위해 강제로 dynamic 설정
+
+export default async function Home() {
   return (
     <div className={style.container}>
-      <RecoBooks></RecoBooks>
-      <AllBooks></AllBooks>
+      <Suspense fallback={<div>추천중...</div>}>
+        <RecoBooks />
+      </Suspense>
+
+      <Suspense fallback={<div>책 가져오는중...</div>}>
+        <AllBooks />
+      </Suspense>
     </div>
   );
 }
